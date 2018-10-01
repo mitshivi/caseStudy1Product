@@ -1,0 +1,55 @@
+<div align="center">
+  <div class="header"><h2 align="center">Edit Product Details</h2></div>
+<div>
+  <form #updateForm="ngForm" (ngSubmit)="update(updateForm.value)" novalidate>
+    <table class="table-condensed" align="center">
+      <tr>
+        <th>ID:</th>&nbsp;
+        <td><input type="number" #idref="ngModel" [(ngModel)]="id" name="id" class="form-control" required></td>
+        <div *ngIf="idref.errors && (idref.dirty || idref.touched)" class="alert alert-danger">
+         <div [hidden]="!idrefref.errors.required">
+            Please enter the Product ID.
+         </div>
+       </div>
+      </tr>
+      <tr>
+        <th>Name:</th>&nbsp;
+        <td><input type="text" #nameref="ngModel" [(ngModel)]="name" name="name" class="form-control" pattern="[A-Z]{1}[a-zA-Z][a-zA-Z ]*" required></td>
+        <div *ngIf="nameref.errors && (nameref.dirty || nameref.touched)" class="alert alert-danger">
+         <div [hidden]="!nameref.errors.required">
+            Please enter the Product Name.
+         </div>
+         <div [hidden]="!nameref.errors.pattern">
+             Please Enter a valid Name.
+         </div>
+       </div>
+      </tr>
+      <tr>
+        <th>Description:</th>&nbsp;
+        <td><input type="text" #descref="ngModel" [(ngModel)]="this.description" name="desciption" class="form-control" pattern="[A-Z]{1}[a-zA-Z][a-zA-Z ]*" required></td>
+        <div *ngIf="descref.errors && (descref.dirty || descref.touched)" class="alert alert-danger">
+         <div [hidden]="!descref.errors.required">
+            Please enter the Product Description.
+         </div>
+         <div [hidden]="!descref.errors.pattern">
+             Please Enter a valid Description.
+         </div>
+       </div>
+      </tr>
+      <tr>
+        <th>Price:</th>&nbsp;
+        <td><input type="number" #priceref="ngModel" [(ngModel)]="price" name="price" class="form-control" required></td>
+        <div *ngIf="priceref.errors && (priceref.dirty || priceref.touched)" class="alert alert-danger">
+         <div [hidden]="!priceref.errors.required">
+            Please enter the Product Price.
+         </div>
+       </div>
+      </tr><br>
+      <tr>
+        <td><input type="submit" value="Submit" [disabled]="!updateForm.form.valid" class="btn btn-success" (click)="update()"></td>
+        <td><a routerLink="/product-list"><input type="button" value="Cancel" class="btn btn-danger"></a></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</div>

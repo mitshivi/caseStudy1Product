@@ -1,0 +1,149 @@
+<div class="header" align="center"><h1>Product List</h1></div><br>
+<div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th colspan="2" text-align="center">Action</th>
+    </tr>
+    <tr *ngFor="let list of products | paginate:{itemsPerPage:5,currentPage:p}">
+     <td>{{list.id}}</td>
+     <td>{{list.name}}</td>
+     <td>{{list.description}}</td>
+     <td>{{list.price | currency: 'INR':true}}</td>
+     <td><a routerLink="/update-product"><input type="button" value="Edit" class=" btn btn-primary" (click)="sendupdData(list)"></a></td>
+     <td><input type="button" value="Delete" class="btn btn-danger" (click)="delData(list.id)"></td>
+    </tr>
+  </table>
+</div>
+ <pagination-controls (pageChange)="p = $event"></pagination-controls>
+ <br><br>
+ <div align="center">
+   <input type="button" value="Add Product" class="btn btn-lg btn-success" text-align="center" (click)="addProduct()">
+ </div>
+ <!--applying the form validation in template driven angular form-->
+ <div *ngIf="a==1">
+ <h2 align="center">Add new Product</h2>
+ <form #productForm="ngForm" (ngSubmit)="submit(productForm.value)">
+   <table class="table-condensed" align="center">
+     <tr class="form-group">
+       <th>ID:</th>
+       <td><input type="number" #idref="ngModel" maxlength="3" required class="form-control" name="id" placeholder="Enter the ID" [(ngModel)]="id"></td>
+       <div *ngIf="idref.errors && (idref.dirty || idref.touched)" class="alert alert-danger">
+         <div [hidden]="!idref.errors.required">
+            Please enter the product ID.
+         </div>
+         <div [hidden]="!idref.errors.maxlength">
+            The maximum length should be 3
+         </div>
+       </div>
+     </tr>
+     <tr class="form-group">
+       <th>Name:</th>
+       <td><input type="text" #nameref="ngModel" required class="form-control" name="name" placeholder="Enter the name" [(ngModel)]="name" pattern="[A-Z]{1}[a-zA-Z][a-zA-Z ]*"></td>
+       <div *ngIf="nameref.errors && (nameref.dirty || nameref.touched)" class="alert alert-danger">
+         <div [hidden]="!nameref.errors.required">
+            Please enter the Product Name.
+         </div>
+         <div [hidden]="!nameref.errors.pattern">
+             Please Enter a valid Name.
+         </div>
+       </div>
+     </tr>
+     <tr class="form-group">
+       <th>Description:</th>
+       <td><input type="text" #descref="ngModel" required class="form-control" name="description" placeholder="Enter the Description" [(ngModel)]="description" pattern="[A-Z]{1}[a-zA-Z][a-zA-Z ]*"></td>
+       <div *ngIf="descref.errors && (descref.dirty || descref.touched)" class="alert alert-danger">
+         <div [hidden]="!descref.errors.required">
+            Please enter the Product Description.
+         </div>
+         <div [hidden]="!descref.errors.pattern">
+             Please Enter a valid Description.
+         </div>
+       </div>
+     </tr>
+     <tr class="form-group">
+       <th>Price:</th>
+       <td><input type="number" #priceref="ngModel" required class="form-control" name="price" placeholder="Enter the Price" [(ngModel)]="price"></td>
+       <div *ngIf="priceref.errors && (priceref.dirty || priceref.touched)" class="alert alert-danger">
+         <div [hidden]="!priceref.errors.required">
+            Please enter the product price.
+         </div>
+       </div>
+     </tr>
+     <tr class="form-group">
+       <td></td>
+       <td><input [disabled]="!productForm.form.valid" type="submit" value="Submit Product" class="btn btn-success"></td>
+     </tr>
+   </table>
+ </form>   
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!--<div *ngIf="a==1">
+<h2 align="center">Add new Product</h2>
+ <form  align="center" (ngSubmit)="f.form.valid && submit()" #f="ngForm" name="form">
+ <div class="form-group">
+  <label class="enter" class="form-group">ID&nbsp;:</label>
+ <input class="form-control" type="text" placeholder="Enter the ID" [(ngModel)]="id" name="id" ng-required="required">
+ </div><br>
+ <div class="form-group">
+  <label class="enter">Name&nbsp;:</label>
+ <input class="form-control" type="text" placeholder="Enter the name" [(ngModel)]="name" name="name" ng-required="required">
+ </div><br>
+ <div class="form-group">
+  <label class="enter">Description&nbsp;:</label>
+ <input class="form-control" type="text" placeholder="Enter the Description" [(ngModel)]="description" name="description" ng-required="required">
+ </div><br>
+  <div class="form-group">
+  <label class="enter">Price&nbsp;:</label>
+ <input class="form-control" type="text" placeholder="Enter the Price" [(ngModel)]="price" name="price" ng-required="required">
+ </div><br>
+ <div class="form-group">
+   <input type="submit" value="Submit Product" class="btn-success btn-md">
+ </div>
+ </form>
+ </div>-->
